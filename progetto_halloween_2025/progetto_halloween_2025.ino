@@ -1,5 +1,7 @@
 int LED = 3;
 int PIR = 10;
+bool fase = true
+//il pin LED sarebbe il pin per il relè collegato alla sirena solo che no ci avevo sbatti di scriverlo di nuovo :)
 
 void setup() {
   Serial.begin(9600);
@@ -21,11 +23,7 @@ void setup() {
   Serial.println("partendo...");
   digitalWrite(LED, LOW);
 
-  delay(3000);
-
-  digitalWrite(LED, HIGH);
-
-  delay(3000);
+  delay(6000);
 
   }
 
@@ -33,21 +31,26 @@ void setup() {
 
 void loop() {
   Serial.println("pronti!");
-//read PIR sensor, if High light LED for 5 seconds
+  //read PIR sensor, if High light LED for 5 seconds
 
-//if low, check again
+  //if low, check again
   delay(500);
 
   if(digitalRead(PIR) == HIGH) {
-  digitalWrite(LED, HIGH);
-  Serial.println("trovato! :)");
-  delay(3000);
-
+    allarme();
   } 
 
   else {
-  digitalWrite(LED, LOW);
-  Serial.println("non trovato :(");
+    digitalWrite(LED, LOW);
+    Serial.println("non trovato :(");
   }
+
+}
+
+void allarme(){
+
+  digitalWrite(LED, HIGH);
+  Serial.println("trovato! :)");
+  delay(3000);
 
 }
