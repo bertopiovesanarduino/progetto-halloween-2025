@@ -1,3 +1,7 @@
+#include <Servo.h>
+
+int teso = 10
+int nonteso = 30
 int LED = 3;
 int PIR = 10;
 bool fase = true
@@ -5,8 +9,10 @@ bool fase = true
 
 void setup() {
   Serial.begin(9600);
-
+  Servo myservo;
+  myservo.attach(9);
 // initialize digital pin 3 as an output for LED
+  myservo.write(teso);
 
   pinMode(LED, OUTPUT);
 
@@ -36,15 +42,20 @@ void loop() {
   //if low, check again
   delay(500);
 
-  if(digitalRead(PIR) == HIGH) {
-    allarme();
-  } 
+  if (fase == true){
 
-  else {
-    digitalWrite(LED, LOW);
-    Serial.println("non trovato :(");
+    if(digitalRead(PIR) == HIGH) {
+      allarme();
+    } 
+
+    else {
+      digitalWrite(LED, LOW);
+      Serial.println("non trovato :(");
+    }
   }
-
+  else{
+    collasso()
+  }
 }
 
 void allarme(){
@@ -52,5 +63,11 @@ void allarme(){
   digitalWrite(LED, HIGH);
   Serial.println("trovato! :)");
   delay(3000);
+
+}
+
+void collasso(){
+
+  myservo.write(nonteso);
 
 }
