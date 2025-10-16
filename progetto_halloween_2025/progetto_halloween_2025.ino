@@ -2,8 +2,8 @@
 
 int LED = 3;
 int PIR = 13;
-bool fase = true
-bool fine = false
+bool fase = true;
+bool fine = false;
 const int stepsPerRevolution = 2048;
 Stepper myStepper(stepsPerRevolution, 8, 10, 9, 11);
 //il pin LED sarebbe il pin per il relè collegato alla sirena solo che no ci avevo sbatti di scriverlo di nuovo :)
@@ -55,7 +55,7 @@ void loop() {
     else{
 
       if(digitalRead(PIR) == HIGH) {
-        collasso()
+        collasso();
       }
 
     }
@@ -77,6 +77,6 @@ void collasso(){
 
   Serial.println("orario");
   myStepper.step(stepsPerRevolution);
-  fine = true
+  fine = true;
 
 }
