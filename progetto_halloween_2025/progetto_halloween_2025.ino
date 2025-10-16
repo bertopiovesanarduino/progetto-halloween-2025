@@ -1,19 +1,16 @@
-#include <Servo.h>
+#include <Stepper.h>
 
-int teso = 10
-int nonteso = 30
 int LED = 3;
-int PIR = 10;
+int PIR = 13;
 bool fase = true
 bool fine = false
+const int stepsPerRevolution = 2048;
+Stepper myStepper(stepsPerRevolution, 8, 10, 9, 11);
 //il pin LED sarebbe il pin per il relè collegato alla sirena solo che no ci avevo sbatti di scriverlo di nuovo :)
 
 void setup() {
   Serial.begin(9600);
-  Servo myservo;
-  myservo.attach(9);
-// initialize digital pin 9 as an output for LED
-  myservo.write(teso);
+  myStepper.setSpeed(15);
 
   pinMode(LED, OUTPUT);
 
@@ -31,6 +28,9 @@ void setup() {
   digitalWrite(LED, LOW);
 
   delay(6000);
+  
+  Serial.println("antiorario");
+  myStepper.step(-stepsPerRevolution);
 
   }
 
@@ -75,7 +75,8 @@ void allarme(){
 
 void collasso(){
 
-  myservo.write(nonteso);
+  Serial.println("orario");
+  myStepper.step(stepsPerRevolution);
   fine = true
 
 }
