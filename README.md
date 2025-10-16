@@ -8,4 +8,4 @@ Il progetto si divide in 2 fasi
   una volta che la mano viene rilevata per la seconda volta muovere lo stepper facendo collassare il tavolo
 
 ## come fare collassare il tavolo?
-  la mia prima idea è stata quella di tagliare due gambe e metterci un perno e poi con una spinta farle sbilanciare (stepper motor).
+  la mia prima idea è stata quella di tagliare due gambe e metterci un perno e poi tirare il fondo con un motore (stepper motor).
