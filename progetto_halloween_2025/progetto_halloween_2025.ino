@@ -1,18 +1,17 @@
 #include <Stepper.h>
 
-int LED = 3;
+int relè = 3;
 int PIR = 13;
 bool fase = true;
 bool fine = false;
 const int stepsPerRevolution = 2048;
 Stepper myStepper(stepsPerRevolution, 8, 10, 9, 11);
-//il pin LED sarebbe il pin per il relè collegato alla sirena solo che no ci avevo sbatti di scriverlo di nuovo :)
 
 void setup() {
   Serial.begin(9600);
   myStepper.setSpeed(15);
 
-  pinMode(LED, OUTPUT);
+  pinMode(relè, OUTPUT);
 
 //initialize digital pin 10 as input for PIR
 
@@ -20,19 +19,11 @@ void setup() {
 
 //initialization time for PIR sensor to warm up
 
-//blink LED to show that something is happening
-
-  for(int i = 0; i < 1; i++) {
-
   Serial.println("partendo...");
-  digitalWrite(LED, LOW);
+  digitalWrite(relè, LOW);
 
-  delay(6000);
-  
   Serial.println("antiorario");
   myStepper.step(-stepsPerRevolution);
-
-  }
 
 }
 
@@ -48,7 +39,7 @@ void loop() {
       } 
 
       else {
-        digitalWrite(LED, LOW);
+        digitalWrite(relè, LOW);
         Serial.println("non trovato :(");
       }
     }
@@ -65,11 +56,12 @@ void loop() {
 
 void allarme(){
 
-  digitalWrite(LED, HIGH);
+  digitalWrite(relè, HIGH);
   Serial.println("trovato! :)");
-  delay(3000);
-  digitalWrite(LED, LOW);
+  delay(1000);
+  digitalWrite(relè, LOW);
   fase = false;
+  delay(1000);
 
 }
 
